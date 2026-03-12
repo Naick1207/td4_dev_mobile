@@ -1,4 +1,4 @@
-int nb = 0;
+int nb = -1;
 
 class Task {
   int id;
@@ -37,11 +37,12 @@ class Task {
         nbhours: n,
         difficulty: n,
         description: '$n'));
+      ++nb;
     }
     return tasks;
   }
   factory Task.newTask(){
-    nb++; //attribut static de la classe.
+    nb++;
     return Task(
       id: nb,
       title: 'title $nb',
@@ -49,6 +50,18 @@ class Task {
       nbhours: nb,
         difficulty: nb%5,
       description: 'description $nb'
+    );
+  }
+
+  factory Task.newTaskTitle(String title, int nbhours, int difficulty, String description) {
+    nb++;
+    return Task(
+      id: nb,
+      title: title,
+      tags: ['tags $nb'],
+      nbhours: nbhours,
+      difficulty: difficulty,
+      description: description,
     );
   }
 

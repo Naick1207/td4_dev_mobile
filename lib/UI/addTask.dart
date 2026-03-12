@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import '../model/task.dart';
-import '../viewModel/taskViewModel.dart';
-
+import 'formAjoutTask.dart';
 
 class AddTask extends StatelessWidget{
   @override
@@ -14,17 +10,7 @@ class AddTask extends StatelessWidget{
         title: Text('Add Task'),
       ),
       body: Center(
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            foregroundColor: Colors.redAccent,
-            backgroundColor: Colors.lightBlue,
-          ),
-          onPressed: () {
-            context.read<TaskViewModel>().addTask(Task.newTask());
-            Navigator.pop(context);
-          },
-          child: const Text("Add Task"),
-        ),
+        child: FormAjoutTask()
       ),
     ) ;
   }
