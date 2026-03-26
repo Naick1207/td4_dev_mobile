@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:td2/UI/ecranSettings.dart';
 import '../viewModel/settingsViewModel.dart';
 import '../viewModel/taskViewModel.dart';
@@ -11,7 +12,8 @@ import 'mytheme.dart';
 import 'addTask.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Database database;
+  const MyApp(this.database, {super.key});
   Widget build(BuildContext context){
     return MultiProvider(
       providers: [
@@ -23,7 +25,7 @@ class MyApp extends StatelessWidget {
             }),
         ChangeNotifierProvider(
             create:(_){
-              TaskViewModel taskViewModel = TaskViewModel();
+              TaskViewModel taskViewModel = TaskViewModel(database);
               taskViewModel.generateTasks();
               return taskViewModel;
             } )
@@ -92,6 +94,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-
-
