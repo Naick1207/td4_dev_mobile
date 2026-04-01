@@ -35,7 +35,7 @@ class Task {
         title: "title $n",
         tags: ['tag $n','tag${n+1}'],
         nbhours: n,
-        difficulty: n,
+        difficulty: 1,
         description: '$n'));
       ++nb;
     }

@@ -11,21 +11,30 @@ Future<void> main() async{
   if (kIsWeb) {
     databaseFactory = databaseFactoryFfiWeb;
   }
-  final database = openDatabase(
+  // À mettre juste avant openDatabase, temporairement
+    final database = openDatabase(
     join(await getDatabasesPath(), 'task_database.db'),
-    onCreate: (db, version) {
-      return db.execute(
+    version: 1,
+    onCreate: (db, version) async {
+      await db.execute(
           'CREATE TABLE task (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, nbhours INTEGER, difficulty INTEGER)'
       );
-      /*
       await db.execute(
-          'CREATE TABLE tags (id INTEGER PRIMARY KEY AUTOINCREMENT, nom TEXT, task_id INTEGER FOREIGN KEY task_id REFERENCES task(id))'
+          'CREATE TABLE tags (id INTEGER PRIMARY KEY AUTOINCREMENT, nom TEXT, task_id INTEGER, FOREIGN KEY (task_id) REFERENCES task(id) ON DELETE CASCADE)'
       );
-
-       */
-    }
+    },
+    onUpgrade: (db, oldVersion, newVersion) async {
+      await db.execute('DROP TABLE IF EXISTS tags');
+      await db.execute('DROP TABLE IF EXISTS task');
+      await db.execute(
+          'CREATE TABLE task (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT, description TEXT, nbhours INTEGER, difficulty INTEGER)'
+      );
+      await db.execute(
+          'CREATE TABLE tags (id INTEGER PRIMARY KEY AUTOINCREMENT, nom TEXT, task_id INTEGER, FOREIGN KEY (task_id) REFERENCES task(id) ON DELETE CASCADE)'
+      );
+    },
   );
   final db = await database;
-
+  await db.execute('PRAGMA foreign_keys = ON');
   runApp(MyApp(db));
 }

@@ -4,12 +4,11 @@ import 'package:sqflite/sqflite.dart';
 import 'package:td2/UI/ecranSettings.dart';
 import '../viewModel/settingsViewModel.dart';
 import '../viewModel/taskViewModel.dart';
+import 'formAjoutTask.dart';
 import 'ecran1.dart';
 import 'ecran2.dart';
 import 'ecran3.dart';
-import 'ecranSettings.dart';
 import 'mytheme.dart';
-import 'addTask.dart';
 
 class MyApp extends StatelessWidget {
   final Database database;
@@ -20,7 +19,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
             create: (_){
               SettingViewModel settingViewModel = SettingViewModel();
-              //getSettings est deja appelee dans le constructeur
               return settingViewModel;
             }),
         ChangeNotifierProvider(
@@ -71,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       floatingActionButton: _selectedIndex==0?FloatingActionButton(
         onPressed: (){Navigator.push(context, MaterialPageRoute(
-          builder: (context) => AddTask(),
+          builder: (context) => FormAjoutTask(),
         )
         );},
         child: const Icon(Icons.add),):const SizedBox.shrink(),
