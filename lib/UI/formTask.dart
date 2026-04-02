@@ -4,19 +4,21 @@ import 'package:td2/model/task.dart';
 import 'package:td2/viewModel/taskViewModel.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-class FormAjoutTask extends StatefulWidget {
+class FormTask extends StatefulWidget {
   final Task? task;
 
-  const FormAjoutTask({super.key, this.task});
+  const FormTask({super.key, this.task});
 
   @override
-  State<FormAjoutTask> createState() => _FormAjoutTaskState();
+  State<FormTask> createState() => _FormTaskState();
 }
 
-class _FormAjoutTaskState extends State<FormAjoutTask> {
+class _FormTaskState extends State<FormTask> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   late TextEditingController textTitleController;
   late TextEditingController textDescriptionController;
+  late TextEditingController textNbHoursController;
+  late TextEditingController textTagsController;
   late int _currentDifficulty;
 
   @override
@@ -24,6 +26,8 @@ class _FormAjoutTaskState extends State<FormAjoutTask> {
     super.initState();
     textTitleController = TextEditingController(text: widget.task?.title ?? '');
     textDescriptionController = TextEditingController(text: widget.task?.description ?? '');
+    textNbHoursController = TextEditingController(text: widget.task?.nbhours.toString() ?? '');
+    textTagsController = TextEditingController(text: widget.task?.tagsToString() ?? '');
     _currentDifficulty = widget.task?.difficulty ?? 1;
   }
 
@@ -31,6 +35,7 @@ class _FormAjoutTaskState extends State<FormAjoutTask> {
   dispose() {
     textTitleController.dispose();
     textDescriptionController.dispose();
+    textNbHoursController.dispose();
     super.dispose();
   }
 
@@ -84,6 +89,26 @@ class _FormAjoutTaskState extends State<FormAjoutTask> {
                   }
                 },
               ),
+              TextFormField(
+                controller: textNbHoursController,
+                decoration: const InputDecoration(hintText: "Nombre d'heures"),
+                validator: (String? value) {
+                  if (value == null || value.isEmpty || int.tryParse(value) == null) {
+                    return "Veuillez insérer un nombre d'heures";
+                  }
+                  return null;
+                },
+              ),
+              TextFormField(
+                controller: textTagsController,
+                decoration: const InputDecoration(hintText: 'Tags (Ces tags doivent être séparés par des virgules)'),
+                validator: (String? value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Veuillez insérer du texte';
+                  }
+                  return null;
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: ElevatedButton(
@@ -105,18 +130,19 @@ class _FormAjoutTaskState extends State<FormAjoutTask> {
                             id: widget.task!.id,
                             title: textTitleController.text,
                             description: textDescriptionController.text,
-                            nbhours: widget.task!.nbhours,
+                            nbhours: int.parse(textNbHoursController.text),
                             difficulty: _currentDifficulty,
-                            tags: widget.task!.tags,
+                            tags: textTagsController.text.split(','),
                           ),
                         );
                       } else {
                         taskViewModel.addTask(
-                          Task.newTaskTitle(
+                          Task.newTask(
                             textTitleController.text,
-                            0,
+                            int.parse(textNbHoursController.text),
                             _currentDifficulty,
                             textDescriptionController.text,
+                            textTagsController.text.split(','),
                           ),
                         );
                       }

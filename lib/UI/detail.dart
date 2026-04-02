@@ -37,6 +37,36 @@ class Detail extends StatelessWidget{
                 subtitle: Text('${task.description}'),
               ),
             ),
+            Card(
+              color: Colors.redAccent,
+              elevation: 7,
+              margin: const EdgeInsets.all(10),
+              child: ListTile(
+                leading: const Icon(Icons.fireplace),
+                title: const Text('Difficulté'),
+                subtitle: Text('${task.difficulty}'),
+              ),
+            ),
+            Card(
+              color: Colors.lightBlueAccent,
+              elevation: 7,
+              margin: const EdgeInsets.all(10),
+              child: ListTile(
+                leading: const Icon(Icons.lock_clock),
+                title: const Text("Nombre d'heures"),
+                subtitle: Text('${task.nbhours}'),
+              ),
+            ),
+            Card(
+              color: Colors.green,
+              elevation: 7,
+              margin: const EdgeInsets.all(10),
+              child: ListTile(
+                leading: const Icon(Icons.tag),
+                title: const Text("Les tags"),
+                subtitle: Text(task.tags.toString()),
+              ),
+            ),
           ],
         )
       )

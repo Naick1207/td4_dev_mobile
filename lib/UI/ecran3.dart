@@ -20,7 +20,7 @@ class ScreenThree extends StatelessWidget{
         }
         else if (snapshot.data != null){
           return ListView.builder(
-            itemCount: snapshot.data?.length, // ? -> verifie si c'est null
+            itemCount: snapshot.data?.length,
             itemBuilder: (BuildContext context, index){
               return Card(
                 color: Colors.black26,
@@ -29,7 +29,7 @@ class ScreenThree extends StatelessWidget{
                 child:ListTile(
                   leading: CircleAvatar(
                     backgroundColor: Colors.deepPurpleAccent,
-                    child: Text(snapshot.data![index].id.toString()) // ! -> si null, renvoie une erreur
+                    child: Text(snapshot.data![index].id.toString())
                   ),
                   title: Text(snapshot.data![index].title),
                 )

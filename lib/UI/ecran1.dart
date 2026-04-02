@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../viewModel/taskViewModel.dart';
 import 'detail.dart';
-import 'formAjoutTask.dart';
+import 'formTask.dart';
 
 class ScreenOne extends StatelessWidget{
 
@@ -41,7 +41,7 @@ class ScreenOne extends StatelessWidget{
                           Navigator.push(
                             context,
                             MaterialPageRoute<void>(
-                              builder: (context) => FormAjoutTask(task: task),
+                              builder: (context) => FormTask(task: task),
                             ),
                           );
                         },

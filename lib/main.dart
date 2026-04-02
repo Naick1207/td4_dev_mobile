@@ -11,7 +11,6 @@ Future<void> main() async{
   if (kIsWeb) {
     databaseFactory = databaseFactoryFfiWeb;
   }
-  // À mettre juste avant openDatabase, temporairement
     final database = openDatabase(
     join(await getDatabasesPath(), 'task_database.db'),
     version: 1,

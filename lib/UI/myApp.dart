@@ -4,7 +4,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:td2/UI/ecranSettings.dart';
 import '../viewModel/settingsViewModel.dart';
 import '../viewModel/taskViewModel.dart';
-import 'formAjoutTask.dart';
+import 'formTask.dart';
 import 'ecran1.dart';
 import 'ecran2.dart';
 import 'ecran3.dart';
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       floatingActionButton: _selectedIndex==0?FloatingActionButton(
         onPressed: (){Navigator.push(context, MaterialPageRoute(
-          builder: (context) => FormAjoutTask(),
+          builder: (context) => FormTask(),
         )
         );},
         child: const Icon(Icons.add),):const SizedBox.shrink(),

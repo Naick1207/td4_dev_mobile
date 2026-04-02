@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyTheme {
-  // 1
   static TextTheme lightTextTheme = TextTheme(
     bodyLarge: GoogleFonts.openSans(
       fontSize: 14.0,
@@ -31,7 +30,6 @@ class MyTheme {
     ),
   );
 
-  // 2
   static TextTheme darkTextTheme = TextTheme(
     bodyLarge: GoogleFonts.openSans(
       fontSize: 14.0,
@@ -60,7 +58,6 @@ class MyTheme {
     ),
   );
 
-  // 3
   static ThemeData light() {
     return ThemeData(
       brightness: Brightness.light,
@@ -72,8 +69,8 @@ class MyTheme {
         ),
       ),
       appBarTheme: const AppBarTheme(
-        foregroundColor: Colors.black,
-        backgroundColor: Colors.white,
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.black,
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.white,
@@ -81,12 +78,12 @@ class MyTheme {
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: Colors.green,
+        unselectedItemColor: Colors.blueAccent,
       ),
       textTheme: lightTextTheme,
     );
   }
 
-  // 4
   static ThemeData dark() {
     return ThemeData(
       brightness: Brightness.dark,
@@ -100,7 +97,7 @@ class MyTheme {
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: Colors.green,
-        unselectedItemColor: Colors.blueAccent,
+        unselectedItemColor: Colors.redAccent,
       ),
       textTheme: darkTextTheme,
     );

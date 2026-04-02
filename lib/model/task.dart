@@ -41,28 +41,28 @@ class Task {
     }
     return tasks;
   }
-  factory Task.newTask(){
-    nb++;
-    return Task(
-      id: nb,
-      title: 'title $nb',
-      tags: ['tags $nb'],
-      nbhours: nb,
-        difficulty: nb%5,
-      description: 'description $nb'
-    );
+
+  String tagsToString() {
+    var stringTags = "";
+    for (var i = 0; i < tags.length; i++) {
+      if (i == tags.length - 1) {
+        stringTags += tags[i];
+      } else {
+        stringTags += tags[i] + ",";
+      }
+    }
+    return stringTags;
   }
 
-  factory Task.newTaskTitle(String title, int nbhours, int difficulty, String description) {
+  factory Task.newTask(String title, int nbhours, int difficulty, String description, List<String> tags) {
     nb++;
     return Task(
       id: nb,
       title: title,
-      tags: ['tags $nb'],
+      tags: tags,
       nbhours: nbhours,
       difficulty: difficulty,
       description: description,
     );
   }
-
 }
